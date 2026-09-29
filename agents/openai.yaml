@@ -1,7 +1,7 @@
 interface:
   display_name: "PM Interview"
-  short_description: "产品经理简历、面试准备、模拟、复盘与私有知识沉淀"
-  default_prompt: "Use $pm-interview to help me prepare for and organize a product manager interview."
+  short_description: "产品经理简历、笔试、Case、面试准备、复盘与私有沉淀"
+  default_prompt: "Use $pm-interview to help me prepare for and organize a product manager recruiting process."
 
 policy:
   allow_implicit_invocation: true

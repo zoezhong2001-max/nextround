@@ -1,7 +1,7 @@
 ---
 name: pm-interview
 description: >-
-  帮助用户进行产品经理求职面试，包括简历优化、定向准备、模拟面试、单场复盘和流程归档。
+  帮助用户进行产品经理求职，包括简历优化、笔试与测评准备、定向面试准备、模拟面试、单场复盘和流程归档。
   Use only when the request clearly concerns product-management recruiting or interviews; do not trigger for generic reviews or resumes outside that context.
 ---
 
@@ -17,19 +17,20 @@ description: >-
 
 ## 开始工作
 
-1. 按 [user-journeys.md](references/user-journeys.md) 先判断用户当前发生的求职事件。用户只通知约面、改期、通过、未通过或转推时，将其视为纯进度更新，直接按 [progress-update-routing.md](references/progress-update-routing.md) 完成状态闭环，不自动扩展为复盘或下一轮准备。需要决定页面产出时读取 [task-output-contract.md](references/task-output-contract.md)。
-2. 定位私有知识库，并按 [private-store-contract.md](references/private-store-contract.md) 只读取完成该用户旅程所需的最少材料。首次使用且已经约面时，只建立完成当前面试所需的最小个人档案，然后在同一任务中继续首轮准备，不先做全量建档。
+1. 按 [user-journeys.md](references/user-journeys.md) 先判断用户当前发生的求职事件。用户只通知进入笔试、测评、Case、群面、面试、改期、通过、未通过或转推时，将其视为纯进度更新，直接按 [progress-update-routing.md](references/progress-update-routing.md) 完成状态闭环，不自动扩展为复盘或下一阶段准备。需要决定页面产出时读取 [task-output-contract.md](references/task-output-contract.md)。
+2. 定位私有知识库，并按 [private-store-contract.md](references/private-store-contract.md) 只读取完成该用户旅程所需的最少材料。首次使用且已经进入明确招聘流程时，只建立完成当前筛选阶段所需的最小个人档案，然后在同一任务中继续准备，不先做全量建档。
 3. 根据旅程组合加载对应能力模块：
    - 简历或经历整理：[resume.md](references/resume.md)
    - 系统整理实习/项目或修复经历深挖口径：[experience-cards.md](references/experience-cards.md)
    - 用户要求 grill、拷打或分轮深挖经历：[grill-mode.md](references/grill-mode.md)，并结合已安装的 `grilling` skill
-   - 面试准备或模拟：[interview-prep.md](references/interview-prep.md)
+   - 笔试、测评、Case、群面或面试准备，以及模拟：[interview-prep.md](references/interview-prep.md)
    - 面试复盘、状态更新或归档：[review-and-archive.md](references/review-and-archive.md)
    - 收到约面、改期、结果、转推等流程进度时：[progress-update-routing.md](references/progress-update-routing.md)
    - 判断产出写到哪里：[knowledge-routing.md](references/knowledge-routing.md)
    - 在 Codex 项目内长期协作或拆分对话：[project-workspace.md](references/project-workspace.md)
-4. 用户提交面试材料并要求复盘时，默认完成复盘、必要的经历修复、状态更新，以及有实际准备内容时的下一轮准备。纯进度通知和用户明确限定的单项任务只完成其范围；没有实质内容的页面或板块不创建。
-5. 将个人化产出增量写回已选定的唯一私有知识库。一次任务可以更新多个页面，但 Review、Round Prep、Experience Card 和 Process 仍保持分离；不为追求“一次完成”而合并成一篇大文档。
+   - 只校准既有私有知识库的格式与结构：[format-calibration.md](references/format-calibration.md)
+4. 用户提交面试材料并要求复盘时，默认完成复盘、必要的经历修复、状态更新，以及有实际准备内容时的下一阶段准备。纯进度通知和用户明确限定的单项任务只完成其范围；没有实质内容的页面或板块不创建。
+5. 将个人化产出增量写回已选定的唯一私有知识库。一次任务可以更新多个页面，但 Review、Stage Prep、Experience Card 和 Process 仍保持分离；不为追求“一次完成”而合并成一篇大文档。
 
 ## 私有知识库边界
 
@@ -44,7 +45,7 @@ description: >-
 ## 内部规则与用户文档
 
 - Skill 保存“怎么读、怎么路由、怎么更新、怎么验收”；飞书只保存用户真正需要查看和行动的内容。
-- 默认不把工作流、维护说明、Skill 测试记录、验收标准、迁移说明、路由清单、写回检查项或内部状态码写入 Hub、Current Plan、Process、Round Prep 或 Review 正文。
+- 默认不把工作流、维护说明、Skill 测试记录、验收标准、迁移说明、路由清单、写回检查项或内部状态码写入 Hub、Current Plan、Process、Stage Prep 或 Review 正文。
 - `confirmed`、`inferred`、`needs-verification`、`state-check-needed` 和内部流程状态可用于判断，但面向用户默认改写为自然中文；只在不确定性会影响决策时显示“待确认”及原因。
 - 用户文档优先回答四件事：当前是什么、依据是什么、结论或差距是什么、下一步做什么。
 
@@ -66,8 +67,8 @@ description: >-
 顶层只按真实求职事件路由：
 
 - 首次使用与最小建档。
-- 已约首轮面试，开始新岗位准备。
-- 一轮面试结束，流程继续或结果待定。
+- 已进入笔试、测评、Case、群面、面试等明确筛选阶段，开始新岗位准备。
+- 一个筛选阶段结束，流程继续或结果待定。
 - 流程未通过、主动退出或被取消。
 - 收到 Offer，需要比较、补充信息或做决策。
 - 求职季结束，需要整体归档与长期沉淀。

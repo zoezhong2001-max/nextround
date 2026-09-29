@@ -33,6 +33,6 @@
 
 ## 完成与写回
 
-frontier 清空后，展示事实模型、未关闭问题和 Experience Card 草稿。用户确认共享理解后，才写回私有知识库：更新既有卡或在 Experience Cards 区域创建新卡，并链接来源 Review。岗位定制类比写入当轮 Round Prep 或专项答案文档，再从 Process 链接。
+frontier 清空后，展示事实模型、未关闭问题和 Experience Card 草稿。用户确认共享理解后，才写回私有知识库：更新既有卡或在 Experience Cards 区域创建新卡，并链接来源 Review。岗位定制类比写入当前 Stage Prep 或专项答案文档，再从 Process 链接。
 
 完成门沿用 [experience-cards.md](experience-cards.md)。如果关键职责、机制或指标仍冲突，卡片可保存为草稿，但不得标记完成。

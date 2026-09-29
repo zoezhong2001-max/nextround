@@ -1,6 +1,6 @@
 # PM Interview Skill
 
-一个用于产品经理求职的 Codex skill，覆盖简历整理、定向准备、模拟面试、单场复盘和流程归档。
+一个用于产品经理求职的 Codex skill，覆盖简历整理、笔试与 Case、定向面试准备、模拟面试、单场复盘和流程归档。
 
 ## 设计原则
 
@@ -17,15 +17,15 @@ GitHub skill（公开规则）
 ## 推荐使用方式
 
 1. 在私有知识库中建立标题为 `PM Interview Hub` 的首页，并加入标记 `PM_INTERVIEW_HUB_V1`。
-2. 在首页登记 Profile、Current Plan、Experience Cards、Processes、Interview Reviews、Reusable Learnings、Resumes、Rule Promotion Queue 和 Inbox 的真实链接。
-3. 新的 JD、面试记录或转写先进入 Inbox。
+2. 在首页登记 Profile、Current Plan、Experience Cards、Processes、Interview Reviews、Reusable Learnings 和 Resumes 的真实链接；Rule Promotion Queue 与 Inbox 按需启用。
+3. 新的笔试、Case、面试记录或转写可以进入 Inbox，也可以直接挂到已确认的 Process。
 4. 处理任务时先读取本 skill 的对应规则，再按最小读取原则读取私有资料。
 5. 将个人化产出写回私有知识库；不要把它们提交到本仓库。
 6. 只有完成验证、脱敏和人工授权的通用经验，才可以从 Rule Promotion Queue 晋升为公开规则。
 
 在 Codex 中长期使用时，建议保留一个求职总控对话，并按“公司 × 岗位 × 批次”各建一个流程对话。同一流程的多轮面试继续使用同一对话；跨对话共享的信息必须写回唯一 Hub。详见 [`references/project-workspace.md`](references/project-workspace.md)。
 
-每轮准备和单场复盘使用固定板块，面试官/HR 反馈驱动下一轮题单与练习调整；画像是带证据和适用范围的假设，不是按公司套标签。详见 [`references/feedback-loop.md`](references/feedback-loop.md) 及准备、复盘模板。
+每个筛选阶段使用独立 Stage Prep，单场面试使用独立 Review；面试官/HR 反馈驱动下一阶段题单与练习调整。画像是带证据和适用范围的假设，不是按公司套标签。详见 [`references/feedback-loop.md`](references/feedback-loop.md) 及准备、复盘模板。
 
 具体的数据边界和目录契约见 [`references/private-store-contract.md`](references/private-store-contract.md)。
 
