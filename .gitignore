@@ -4,5 +4,9 @@
 *.docx
 data/
 private/
+.local-data/
 .env
 .env.*
+node_modules/
+dist/
+coverage/

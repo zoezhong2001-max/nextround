@@ -1,55 +1,53 @@
-# PM Interview Skill
+# NextRound · 下一程
 
-一个用于产品经理求职的 Codex skill，覆盖简历整理、笔试与 Case、定向面试准备、模拟面试、单场复盘和流程归档。
+本地优先的求职 Agent 工作台：以岗位与阶段为主线，连接面试准备、逐题复盘、经历深挖与个人资产。
 
-## 设计原则
+> 2.0：本项目由 [pm-interview](https://github.com/zoezhong2001-max/pm-interview)（产品经理求职 skill，规则层）演进而来——从「一套领域规则」升级为「规则 + 工作台 + Agent 执行」的完整形态。skill 本身保留在 [`skills/pm-interview`](skills/pm-interview/SKILL.md)，作为可替换的领域能力继续独立演进。
 
-这个仓库只保存可公开复用的规则、模板和路由约定。个人背景、真实简历、公司流程、面试记录、逐字稿和复盘结果保存在用户选定的唯一私有知识库中。
+## 是什么
 
-```text
-GitHub skill（公开规则）
-        ↓ 指导读取与写入
-私有知识库（个人事实与产出）
+求职准备的真实痛点不是缺模板，而是：资料散落在十几个文档里、面试复盘写完就沉底、上一场的教训带不到下一场、AI 生成的内容和人工修改互相覆盖。
+
+NextRound 的做法是把分工拆干净：
+
+- **Agent 宿主**（如 Codex，或其他兼容 app-server 协议的客户端）负责对话与执行——用户表达目标，Agent 读资料、分析、产出；
+- **工作台**（本仓库）负责归属与可信——资料与成果的结构化呈现、编辑、版本、来源、执行状态；
+- **领域 skill**（`skills/`）负责方法——怎么复盘、怎么准备、事实边界在哪，不硬编码在工作台里；
+- **私有数据区**（`.local-data/`，git 忽略）保存全部个人记录，公开仓库不含任何私人内容。
+
+## 核心设计
+
+| 设计 | 文档 |
+|---|---|
+| 分层架构：回环绑定的 Express 服务 + React 四区工作台 + 受约束内部工具 + 事务写入 | [docs/architecture.md](docs/architecture.md) |
+| Agent memory 机制：基础文档 + 人工编辑日志叠加、可编辑性白名单、revision 过期检测、事实分级 | [docs/agent-memory.md](docs/agent-memory.md) |
+| 产品原则：Agent/工作台/skill 的职责边界与协作约定 | [docs/product-principles.md](docs/product-principles.md) |
+| Agent 工作流：动态工具协议、任务生命周期、失败续做、人工确认语义 | [docs/agent-workflow.md](docs/agent-workflow.md) |
+
+三个最值得展开的设计决策：
+
+1. **工作台不内置聊天。** 对话与执行交给专业 Agent 宿主，工作台专注把「成果」做成可查看、可修改、可追溯、可继续迭代的一等对象，而不是又一条聊天记录。
+2. **人工编辑以日志叠加，永不覆盖。** 用户的每次修改是追加在基础文档之上的编辑记录（含 before/after），Agent 重新生成内容时人工修改天然保留；原始逐字稿与实际问答对人和 Agent 都不可改写。
+3. **事实分级，拒绝编造。** 每条档案事实带来源与核实状态（材料记载 / 本人确认 / 待验证）；历史面试原话只证明当时表达，不自动升级为事实；量化没有来源时明确标待核实。
+
+## 快速开始
+
+需要 Node.js 24+。
+
+```sh
+npm install
+npm run dev        # 打开 http://127.0.0.1:4317（只监听回环地址）
+npm test           # 单元与事务测试
+npm run build      # 前端构建
 ```
 
-私有知识库可以使用本地 Codex 项目、Feishu/Lark 或其他已授权的文档工具，但同一求职工作流只维护一个 Hub。skill 不保存固定账号、文档链接、空间 ID 或访问凭证。
+可选环境变量：`PORT`、`PM_DATA_DIR`（私有数据目录）、`PM_SKILL_DIR`（领域 skill 目录，默认使用仓库内 `skills/pm-interview`）。
 
-## 推荐使用方式
+Agent 连接与验证方式见 [docs/agent-workflow.md](docs/agent-workflow.md)。
 
-1. 在私有知识库中建立标题为 `PM Interview Hub` 的首页，并加入标记 `PM_INTERVIEW_HUB_V1`。
-2. 在首页登记 Profile、Current Plan、Experience Cards、Processes、Interview Reviews、Reusable Learnings 和 Resumes 的真实链接；Rule Promotion Queue 与 Inbox 按需启用。
-3. 新的笔试、Case、面试记录或转写可以进入 Inbox，也可以直接挂到已确认的 Process。
-4. 处理任务时先读取本 skill 的对应规则，再按最小读取原则读取私有资料。
-5. 将个人化产出写回私有知识库；不要把它们提交到本仓库。
-6. 只有完成验证、脱敏和人工授权的通用经验，才可以从 Rule Promotion Queue 晋升为公开规则。
+## 致谢
 
-在 Codex 中长期使用时，建议保留一个求职总控对话，并按“公司 × 岗位 × 批次”各建一个流程对话。同一流程的多轮面试继续使用同一对话；跨对话共享的信息必须写回唯一 Hub。详见 [`references/project-workspace.md`](references/project-workspace.md)。
-
-每个筛选阶段使用独立 Stage Prep，单场面试使用独立 Review；面试官/HR 反馈驱动下一阶段题单与练习调整。画像是带证据和适用范围的假设，不是按公司套标签。详见 [`references/feedback-loop.md`](references/feedback-loop.md) 及准备、复盘模板。
-
-具体的数据边界和目录契约见 [`references/private-store-contract.md`](references/private-store-contract.md)。
-
-## 仓库内容
-
-- `SKILL.md`：入口、路由、状态和隐私边界。
-- `references/`：按场景加载的方法与规则。
-- `assets/templates/`：不含真实数据的空白模板。
-- `scripts/privacy-check.sh`：发布前的自动隐私检查。
-- `agents/openai.yaml`：Codex UI 元数据。
-
-## 发布前检查
-
-在仓库根目录运行：
-
-```bash
-bash scripts/privacy-check.sh .
-```
-
-自动检查不能替代人工复核。发布前仍需检查 Git diff，确认没有姓名、联系方式、公司内部信息、私人文档链接、真实简历、面试原话或密钥。
-
-## 安装
-
-将整个 `pm-interview` 目录放入你的 Codex skills 目录，或使用 Codex 的 skill 安装能力从 GitHub 仓库安装。安装后可通过 `$pm-interview` 显式调用；在产品经理求职或面试语境中也允许自动触发。
+本项目的组织方式参考了 [ZJU-REAL/Easel](https://github.com/ZJU-REAL/Easel)（画像驱动 + 可执行 skill + Web 工作台的分层思路），在此致谢。
 
 ## License
 

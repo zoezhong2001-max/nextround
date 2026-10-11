@@ -1,0 +1,32 @@
+{
+  "name": "nextround",
+  "version": "2.0.0",
+  "type": "module",
+  "engines": {
+    "node": ">=24.0.0"
+  },
+  "scripts": {
+    "dev": "node server/index.mjs",
+    "start": "node server/index.mjs --production",
+    "build": "vite build",
+    "test": "node --test tests/*.test.mjs",
+    "import:feishu": "node scripts/import-feishu.mjs",
+    "check:agent": "node scripts/check-agent.mjs"
+  },
+  "dependencies": {
+    "express": "^5.1.0",
+    "jose": "^6.0.0",
+    "lucide-react": "^0.468.0",
+    "multer": "^2.0.0",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0",
+    "react-markdown": "^10.1.0",
+    "remark-gfm": "^4.0.1",
+    "remark-parse": "^11.0.0",
+    "unified": "^11.0.5"
+  },
+  "devDependencies": {
+    "prettier": "^3.9.9",
+    "vite": "^7.0.0"
+  }
+}
