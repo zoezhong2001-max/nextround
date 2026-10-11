@@ -11,4 +11,4 @@ jobs:
       - name: Check out repository
         uses: actions/checkout@v4
       - name: Scan for private data
-        run: bash scripts/privacy-check.sh .
+        run: bash skills/pm-interview/scripts/privacy-check.sh .
